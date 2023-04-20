@@ -88,6 +88,12 @@ def lowlight_test(lowlight_enhance):
 
 
 def main(_):
+    # enable JIT compilation
+    tf.config.optimizer.set_jit(True)
+
+    # or explicitly enable MLIR optimizations
+    tf.config.optimizer.set_experimental_options({'mlir_disable': False})
+    
     if args.use_gpu:
         print("[*] GPU\n")
         os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_idx
