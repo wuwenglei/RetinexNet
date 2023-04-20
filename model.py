@@ -5,7 +5,7 @@ import time
 import random
 
 from PIL import Image
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import numpy as np
 
 from utils import *
@@ -241,9 +241,12 @@ class lowlight_enhance(object):
             input_low_test = np.expand_dims(test_low_data[idx], axis=0)
             [R_low, I_low, I_delta, S] = self.sess.run([self.output_R_low, self.output_I_low, self.output_I_delta, self.output_S], feed_dict = {self.input_low: input_low_test})
 
-            if decom_flag == 1:
-                save_images(os.path.join(save_dir, name + "_R_low." + suffix), R_low)
-                save_images(os.path.join(save_dir, name + "_I_low." + suffix), I_low)
-                save_images(os.path.join(save_dir, name + "_I_delta." + suffix), I_delta)
-            save_images(os.path.join(save_dir, name + "_S."   + suffix), S)
+            # if decom_flag == 1:
+            save_images(os.path.join(save_dir, name + "_R_low." + suffix), R_low)
+            save_images(os.path.join(save_dir, name + "_I_low." + suffix), I_low)
+            save_images(os.path.join(save_dir, name + "_I_delta." + suffix), I_delta)
+            
+            # modified
+            # save_images(os.path.join(save_dir, name + "_S."   + suffix), S)
+            # save_images(os.path.join(save_dir, name + "."   + suffix), S)
 

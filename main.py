@@ -4,7 +4,7 @@ import argparse
 from glob import glob
 
 from PIL import Image
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 from model import lowlight_enhance
 from utils import *

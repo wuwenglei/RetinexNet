@@ -32,7 +32,16 @@ def data_augmentation(image, mode):
 
 def load_images(file):
     im = Image.open(file)
-    return np.array(im, dtype="float32") / 255.0
+
+    # modified
+    res =  np.array(im, dtype="float32") / 255.0
+    
+    # added
+    if len(res.shape) == 2:
+        res = np.dstack((res, res, res))
+    elif res.shape[2] == 4:
+        res = np.delete(res, 3, 2)
+    return res
 
 def save_images(filepath, result_1, result_2 = None):
     result_1 = np.squeeze(result_1)
